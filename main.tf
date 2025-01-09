@@ -4,13 +4,13 @@ terraform {
       source  = "hashicorp/aws"
       version = "5.83.0"
     }
-    cloud { 
-      
-      organization = "testmagsyg2" 
+  }
+  cloud {
 
-      workspaces { 
-        name = "workspace" 
-      } 
-    } 
+    organization = "testmagsyg2"
+
+    workspaces {
+      name = "workspace"
+    }
   }
 }
