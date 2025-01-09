@@ -67,7 +67,11 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v4
-
+    - name: "check is TF_API_TOKEN exists"
+      env: 
+          TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      if: ${{ env.TF_API_TOKEN == '' }}
+      run: 'echo "echo the secret \"TF_API_TOKEN\" has not been made; echo please go to \"settings \> secrets \> actions\" to create it"'
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
