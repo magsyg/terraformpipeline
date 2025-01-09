@@ -1,0 +1,14 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "5.83.0"
+    }
+    backend "remote" {
+      organization = "testmagsyg2"
+      workspaces {
+        name = "workspace"
+      }
+    }
+  }
+}
