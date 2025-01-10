@@ -8,7 +8,7 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 resource "aws_s3_bucket_website_configuration" "test" {
-  bucket = aws_s3_bucket.bucket.id
+bucket = aws_s3_bucket.bucket.id
   index_document {
     suffix = "index.html"
   }
