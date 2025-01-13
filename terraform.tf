@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "bucket" {
-  bucket        = "magnussopraworkingbucket"
+  bucket        = "magnusnewsoprabucket"
   force_destroy = true
 }
 
