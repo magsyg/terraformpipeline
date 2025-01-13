@@ -1,10 +1,8 @@
 name: 'Terraform'
 
 on:
-  push:
-    branches: [ "master" ]
   pull_request:
-
+    branches: [ "develop", "master" ]
 
 env:
   TF_CLOUD_ORGANIZATION: "testmagsyg2"
@@ -18,7 +16,7 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Terraform Deploy'
+    name: 'Terraform'
     runs-on: ubuntu-latest
     environment: production
 
@@ -44,10 +42,6 @@ jobs:
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
       run: terraform fmt -check
-
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -input=false
-    - name: Terraform Apply
-      if: github.event_name == 'push'
-      run: terraform apply -auto-approve -input=false
