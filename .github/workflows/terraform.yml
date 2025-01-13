@@ -5,6 +5,7 @@ on:
     branches: [ "master" ]
   pull_request:
 
+
 env:
   TF_CLOUD_ORGANIZATION: "testmagsyg2"
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
@@ -17,7 +18,7 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: 'Terraform Deploy'
     runs-on: ubuntu-latest
     environment: production
 
@@ -47,11 +48,6 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -input=false
-    - name: Check is merge
-      if: github.event.pull_request.merged
-      run: terraform fmt -check
-      # On push to "master", build or change infrastructure according to Terraform configuration files
-      # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
-      if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+      if: github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
